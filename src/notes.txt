@@ -1,0 +1,2 @@
+1 - Included package radium to include complex styling in js files.
+    npm install -save radium
