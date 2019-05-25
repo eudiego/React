@@ -1,2 +1,9 @@
 1 - Included package radium to include complex styling in js files.
     npm install -save radium
+2 - Using css module now is more simple react v2+ https://programmingwithmosh.com/react/css-modules-react/
+    Just create [class name].module.css and import in the component
+    - Old way we had to run the command "npm run eject" and change the  configuration:
+        open webpach.config.dev.js and webpach.config.prod.js 
+        find Modude: and test /\.css$/ below importLoaders: 1 add the line
+            modules: true,
+            localIdentName: '[name]__[local]__[hash:base64:5]'

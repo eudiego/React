@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium, {StyleRoot} from 'radium';
+//import Radium, {StyleRoot} from 'radium';
+import AppStyles from './app.module.css';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
 
@@ -59,7 +61,7 @@ class App extends Component {
   render() {
     
     //Using radium component :hover
-    const style = {
+    /* const style = {
       backgroundColor: 'green',
       color: 'white',
       font: 'inherit',
@@ -70,21 +72,21 @@ class App extends Component {
         backgroundColor: 'lightgreen',
         color: 'black'
       }
-    };
+    }; */
 
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons)
     {
       persons = (
-        <div >
+        <div>
           {this.state.persons.map((person, index) => {
-            return <Person 
-            click={() => this.deletePersonHandler(index)} 
-            key={person.id} 
+            return <ErrorBoundary key={person.id}><Person 
+            click={() => this.deletePersonHandler(index)}  
             name={person.name} 
             age={person.age}
-            changed={(event) => this.nameChangeHandler(event, person.id)}  />
+            changed={(event) => this.nameChangeHandler(event, person.id)}  /> </ErrorBoundary>
           })}
           {/* <Person 
             name={this.state.persons[0].name} 
@@ -98,12 +100,7 @@ class App extends Component {
         </div>
       )
 
-      style.backgroundColor = 'red';
-
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      btnClass = AppStyles.Red;
     }
 
     //Changing classes dynamically
@@ -111,24 +108,24 @@ class App extends Component {
 
     if(this.state.persons.length <= 2)
     {
-      classes.push('red');
+      classes.push(AppStyles.red);
     }
     if (this.state.persons <= 1)
     {
-      classes.push('bold');
+      classes.push(AppStyles.bold);
     }
 
     //console.log(classes);
     //console.log(classes.join(' ')); Join the item of array in a string.
 
   return (
-    <StyleRoot> 
-      <div className="App">
+    //<StyleRoot> 
+      <div className={AppStyles.App}>
         <h1 className={classes.join(' ')} >My react app</h1> 
-        <button style={style} onClick={this.tooglePersonsHandler}>Toogle List</button>
+        <button className={btnClass} onClick={this.tooglePersonsHandler}>Toogle List</button>
           {persons}
       </div>
-    </StyleRoot>
+    //</StyleRoot>
 /* one way to implement conditional content
 {       { this.state.showPersons ? 
           <div >
@@ -149,4 +146,5 @@ class App extends Component {
   }
 }
 
-export default Radium(App);
+//export default Radium(App);
+export default App;
