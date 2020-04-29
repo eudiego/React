@@ -7,3 +7,4 @@
         find Modude: and test /\.css$/ below importLoaders: 1 add the line
             modules: true,
             localIdentName: '[name]__[local]__[hash:base64:5]'
+3 -
